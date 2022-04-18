@@ -1,7 +1,7 @@
 # Group Name :
 # Group Members:
 1. Nur Hafni Binti Mohd Nizam (1913844)
-2. 
+2. Farjana Mammi (1912190)
 
 
 # Work Distribution
