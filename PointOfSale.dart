@@ -1,6 +1,6 @@
 import 'dart:io';
 
-double newPrice = 0; 
+double newPrice = 0;
 double disc = 0; //Discount price
 double totalAfterDiscount = 0;
 
@@ -30,14 +30,15 @@ void main() {
     print("1. Insert product");
 
     //PART ASIMAH
-    print("2. List of products"); //print product list with the detail 
+    print("2. List of products"); //print product list with the detail
 
     print("3. Total amount after discount");
 
-    print("4. Exit \n");
+    print("4. Make Payment \n");
 
-    stdout.write("Enter your choice:");
+    stdout.write("Enter your choice: ");
     int input = int.parse(stdin.readLineSync()!);
+    print("\n");
 
     if (input == 1) {
       createItem(itemList);
@@ -46,6 +47,7 @@ void main() {
     } else if (input == 3){
       afterDiscountPrice();
     } else {
+      makePayment();
       break;
     }
   }
@@ -114,10 +116,37 @@ discount(String prodName, double prodPrice) {
     newPrice = prodPrice;
 
   }
-  return newPrice; 
+  return newPrice;
 }
 
 afterDiscountPrice() {
   print("The total amount after the discount is RM ${totalAfterDiscount} \n");
 }
 
+makePayment() {
+  totalAfterDiscount.toStringAsFixed(2);
+  print("TIME : ${DateTime.now()}");
+  print("===========================");
+  print("Your total is RM ${totalAfterDiscount}");
+  print("===========================");
+  stdout.write("Enter your money: ");
+  double money = double.parse(stdin.readLineSync()!);
+
+  while (money<totalAfterDiscount) {
+    print("Not enough money T.T");
+    stdout.write("Enter your money: ");
+    double money = double.parse(stdin.readLineSync()!);
+
+    if (money>=totalAfterDiscount) {
+      double balance = money - totalAfterDiscount;
+      balance.toStringAsFixed(2);
+      print("TOTAL  : RM ${totalAfterDiscount}");
+      print("CASH   : RM ${money}");
+      print("CHANGE : RM ${balance}");
+      print("===========================");
+      print("Thank you! Have a nice day!");
+      break;
+    }
+  }
+
+}
