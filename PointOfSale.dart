@@ -1,6 +1,6 @@
 import 'dart:io';
 
-// this variables should never be global. (too lazy to fix that as well )
+
 double newPrice = 0;
 double disc = 0; //Discount price
 double totalAfterDiscount = 0;
@@ -36,19 +36,18 @@ void main() {
     print("2. List of products"); //print product list with the detail
 
     print("3. Total amount after discount");
-
     print("4. Set GST percent (default = 0.6% )");
 
     print("5. Make Payment \n");
 
     stdout.write("Enter your choice: ");
 
-    // rule 1. never trust the user, we implement some error handling
+
     try {
       int input = int.parse(stdin.readLineSync()!);
 
-      if (input > 3 || input < 0) {
-        print("ERROR: Please select a number between 1 - 3");
+      if (input > 4 || input < 0) {
+        print("ERROR: Pls select a number a number between 1 - 3");
         continue;
       }
       if (input == 1) {
@@ -58,19 +57,20 @@ void main() {
       } else if (input == 3) {
         afterDiscountPrice();
       } else if (input == 4) {
+        stdout.write("Enter gst percent: ");
         gstValue = double.parse(stdin.readLineSync()!);
-      } else {
+      } else if (input == 5) {
         makePayment();
         break;
       }
     } on FormatException {
-      print("ERROR: Please insert an interger number");
+      print("ERROR: Pls an interger number");
     }
   }
 }
 
 void getGST(double productPrice) {
-  gstValue == 0.0 ? gstValue = 0.6 : gstValue;
+  gstValue == 0.0 ? gstValue = 0.6 : gstValue = gstValue;
   double totalGST = productPrice * (gstValue / (100 + gstValue));
   // double finalAmount = totalGST + productPrice;
   print("Total GST for 1 pack is: " + totalGST.toStringAsFixed(3));
@@ -109,54 +109,35 @@ void calcQuantity(double price, double quantity, String productName) {
 
 //Declare discount for few items
 discount(String prodName, double prodPrice) {
-  prodName = prodName.toLowerCase(); 
+  prodName
+      .toLowerCase(); 
 
-  switch (prodName) {
-    case "milo":
-      {
-        disc = prodPrice * 0.15;
-        newPrice = prodPrice - disc;
-        print("Price After Discount for 1 pack ${newPrice}");
-      }
-      break;
 
-    case "downy":
-      {
-        disc = prodPrice * 0.3;
-        newPrice = prodPrice - disc;
-        print("Price After Discount for 1 bottle ${newPrice}");
-      }
-      break;
-
-    case "chipsmore":
-      {
-        disc = prodPrice * 0.1;
-        newPrice = prodPrice - disc;
-        print("Price After Discount for 1 pack ${newPrice}");
-      }
-      break;
-
-    case "bowl":
-      {
-        disc = prodPrice * 0.7;
-        newPrice = prodPrice - disc;
-        print("Price After Discount for 1 bowl ${newPrice}");
-      }
-      break;
-
-    default:
-      {
-        newPrice = prodPrice;
-        break;
-      }
+  if (prodName == "milo") {
+    disc = prodPrice * 0.15;
+    newPrice = prodPrice - disc;
+    print("Price After Discount for 1 pack ${newPrice}");
+  } else if (prodName == "downy") {
+    disc = prodPrice * 0.3;
+    newPrice = prodPrice - disc;
+    print("Price After Discount for 1 bottle ${newPrice}");
+  } else if (prodName == "Chipsmore" || prodName == "chipsmore") {
+    disc = prodPrice * 0.1;
+    newPrice = prodPrice - disc;
+    print("Price After Discount for 1 pack ${newPrice}");
+  } else if (prodName == "Bowl" || prodName == "bowl") {
+    disc = prodPrice * 0.7;
+    newPrice = prodPrice - disc;
+    print("Price After Discount for 1 bowl ${newPrice}");
+  } else {
+    newPrice = prodPrice;
   }
   getGST(prodPrice);
   return newPrice;
 }
 
 afterDiscountPrice() {
-  // why not passing the value to the function instead of making it global?
-  // u remember making globals is bad programming practice??
+
   print("The total amount after the discount is RM ${totalAfterDiscount} \n");
 }
 
