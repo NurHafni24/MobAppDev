@@ -20,7 +20,7 @@ class Item { //Nur Hafni (1913844)
   }
 }
 
-void main() { //Nur Hafni (1913844), Farjana (1912190)
+void main() { //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182)
   List<Item> itemList = []; //To store products inserted
 
   while (true) {
