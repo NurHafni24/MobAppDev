@@ -81,8 +81,7 @@ void createItem(List<Item> items) {
   print('\n');
 
   stdout.write("Name: ");
-  String productName = stdin
-      .readLineSync()!; // tf is input1, input2, input3 ? use some meaningful variable names
+  String productName = stdin.readLineSync()!;
 
   stdout.write("Price: ");
   double productPrice = double.parse(stdin.readLineSync()!);
