@@ -1,6 +1,5 @@
 import 'dart:io';
 
-// this variables should never be global. (too lazy to fix that as well )
 double newPrice = 0;
 double disc = 0; //Discount price
 double totalAfterDiscount = 0;
@@ -42,7 +41,6 @@ void main() {
 
     stdout.write("Enter your choice: ");
 
-    // rule 1. never trust the user we implementing some error handling
     try {
       int input = int.parse(stdin.readLineSync()!);
 
@@ -82,7 +80,7 @@ void createItem(List<Item> items) {
 
   stdout.write("Name: ");
   String productName = stdin
-      .readLineSync()!; // tf is input1, input2, input3 ? use some meaningful variable names
+      .readLineSync()!; 
 
   stdout.write("Price: ");
   double productPrice = double.parse(stdin.readLineSync()!);
@@ -109,11 +107,7 @@ void calcQuantity(double price, double quantity, String productName) {
 //Declare discount for few items
 discount(String prodName, double prodPrice) {
   prodName
-      .toLowerCase(); // having this line will save ur time if (x == 'AA' || x == 'aa')
-
-  // also instead of using if statement use switch. (am lazy to write that)
-  // something like this switch (productName) {case "milo": }...
-
+      .toLowerCase(); 
   if (prodName == "milo") {
     disc = prodPrice * 0.15;
     newPrice = prodPrice - disc;
@@ -138,8 +132,6 @@ discount(String prodName, double prodPrice) {
 }
 
 afterDiscountPrice() {
-  // why not passing the value to the function instead of making it global?
-  // u remember making globals is bad programming practice??
   print("The total amount after the discount is RM ${totalAfterDiscount} \n");
 }
 
