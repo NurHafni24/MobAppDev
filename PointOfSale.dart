@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 double newPrice = 0;
 double disc = 0; //Discount price
 double totalAfterDiscount = 0;
@@ -36,18 +35,18 @@ void main() {
     print("2. List of products"); //print product list with the detail
 
     print("3. Total amount after discount");
+    
     print("4. Set GST percent (default = 0.6% )");
 
     print("5. Make Payment \n");
 
     stdout.write("Enter your choice: ");
 
-
     try {
       int input = int.parse(stdin.readLineSync()!);
 
-      if (input > 4 || input < 0) {
-        print("ERROR: Pls select a number a number between 1 - 3");
+      if (input > 5 || input < 1) {
+        print("ERROR: Please select a number between 1 - 5");
         continue;
       }
       if (input == 1) {
@@ -64,7 +63,7 @@ void main() {
         break;
       }
     } on FormatException {
-      print("ERROR: Pls an interger number");
+      print("ERROR: Please enter an interger number");
     }
   }
 }
@@ -83,7 +82,7 @@ void createItem(List<Item> items) {
 
   stdout.write("Name: ");
   String productName = stdin
-      .readLineSync()!; 
+      .readLineSync()!; // tf is input1, input2, input3 ? use some meaningful variable names
 
   stdout.write("Price: ");
   double productPrice = double.parse(stdin.readLineSync()!);
@@ -109,28 +108,46 @@ void calcQuantity(double price, double quantity, String productName) {
 
 //Declare discount for few items
 discount(String prodName, double prodPrice) {
-  prodName
-      .toLowerCase(); 
+  prodName = prodName.toLowerCase();
 
+ switch (prodName) {
+    case "milo":
+      {
+        disc = prodPrice * 0.15;
+        newPrice = prodPrice - disc;
+        print("Price After Discount for 1 pack ${newPrice}");
+      }
+      break;
 
-  if (prodName == "milo") {
-    disc = prodPrice * 0.15;
-    newPrice = prodPrice - disc;
-    print("Price After Discount for 1 pack ${newPrice}");
-  } else if (prodName == "downy") {
-    disc = prodPrice * 0.3;
-    newPrice = prodPrice - disc;
-    print("Price After Discount for 1 bottle ${newPrice}");
-  } else if (prodName == "Chipsmore" || prodName == "chipsmore") {
-    disc = prodPrice * 0.1;
-    newPrice = prodPrice - disc;
-    print("Price After Discount for 1 pack ${newPrice}");
-  } else if (prodName == "Bowl" || prodName == "bowl") {
-    disc = prodPrice * 0.7;
-    newPrice = prodPrice - disc;
-    print("Price After Discount for 1 bowl ${newPrice}");
-  } else {
-    newPrice = prodPrice;
+    case "downy":
+      {
+        disc = prodPrice * 0.3;
+        newPrice = prodPrice - disc;
+        print("Price After Discount for 1 bottle ${newPrice}");
+      }
+      break;
+
+    case "chipsmore":
+      {
+        disc = prodPrice * 0.1;
+        newPrice = prodPrice - disc;
+        print("Price After Discount for 1 pack ${newPrice}");
+      }
+      break;
+
+    case "bowl":
+      {
+        disc = prodPrice * 0.7;
+        newPrice = prodPrice - disc;
+        print("Price After Discount for 1 bowl ${newPrice}");
+      }
+      break;
+
+    default:
+      {
+        newPrice = prodPrice;
+        break;
+      }
   }
   getGST(prodPrice);
   return newPrice;
@@ -150,12 +167,12 @@ makePayment() {
   stdout.write("Enter your money: ");
   double money = double.parse(stdin.readLineSync()!);
 
-  while (money < totalAfterDiscount) {
+   if (money < totalAfterDiscount) {
     print("Not enough money T.T");
     stdout.write("Enter your money: ");
-    double money = double.parse(stdin.readLineSync()!);
-
-    if (money >= totalAfterDiscount) {
+    money = double.parse(stdin.readLineSync()!);
+  }
+    else  {
       double balance = money - totalAfterDiscount;
       balance.toStringAsFixed(2);
       print("TOTAL  : RM ${totalAfterDiscount}");
@@ -163,7 +180,5 @@ makePayment() {
       print("CHANGE : RM ${balance}");
       print("===========================");
       print("Thank you! Have a nice day!");
-      break;
-    }
-  }
+    } 
 }
