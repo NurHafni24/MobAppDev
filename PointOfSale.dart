@@ -5,7 +5,7 @@ double disc = 0; //Discount price
 double totalAfterDiscount = 0;
 double gstValue = 0.0;
 
-class Item {
+class Item { //Nur Hafni (1913844)
   //late keyword is to tell the compiler to treat this variable as non-nullable and will be initialized later
   late String name;
   late double price;
@@ -20,7 +20,7 @@ class Item {
   }
 }
 
-void main() {
+void main() { //Nur Hafni (1913844)
   List<Item> itemList = []; //To store products inserted
 
   while (true) {
@@ -75,7 +75,7 @@ void getGST(double productPrice) {
   print("Total GST for 1 pack is: " + totalGST.toStringAsFixed(3));
 }
 
-void createItem(List<Item> items) {
+void createItem(List<Item> items) { //Nur Hafni (1913844)
   stdout.write("Enter product description:");
 
   print('\n');
@@ -98,7 +98,7 @@ void createItem(List<Item> items) {
   print("Product inserted at ${newItem.created_at}");
 }
 
-void calcQuantity(double price, double quantity, String productName) {
+void calcQuantity(double price, double quantity, String productName) { //Nur Hafni (1913844)
   var payment = discount(
       productName, price); //Total price after calculate with quantity inserted
 
@@ -106,7 +106,7 @@ void calcQuantity(double price, double quantity, String productName) {
 }
 
 //Declare discount for few items
-discount(String prodName, double prodPrice) {
+discount(String prodName, double prodPrice) { //Nur Hafni (1913844)
   prodName = prodName.toLowerCase();
 
  switch (prodName) {
@@ -152,7 +152,7 @@ discount(String prodName, double prodPrice) {
   return newPrice;
 }
 
-afterDiscountPrice() {
+afterDiscountPrice() { //Nur Hafni (1913844)
 
   print("The total amount after the discount is RM ${totalAfterDiscount} \n");
 }
