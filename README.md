@@ -6,7 +6,7 @@
 
 
 # Work Distribution
-1. Nur Hafni - Discount Function
+1. Nur Hafni - Discount Function, Local storage (Store items list)
 2. Farjana Mammi - GST Function
 3. Siti Nurul Fatini - Balance Function
 
