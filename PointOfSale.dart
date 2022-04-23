@@ -63,7 +63,7 @@ void main() {
         break;
       }
     } on FormatException {
-      print("ERROR: Please enter an interger number");
+      print("ERROR: Please enter an integer number");
     }
   }
 }
