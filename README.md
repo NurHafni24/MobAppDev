@@ -1,5 +1,5 @@
 # Group Name : Fuego
-# Vide Presentation Link :
+# Video Presentation Link :
 # Group Members :
 1. Nur Hafni Binti Mohd Nizam (1913844)
 2. Farjana Mammi (1912190)
