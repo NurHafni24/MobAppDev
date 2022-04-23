@@ -20,7 +20,7 @@ class Item { //Nur Hafni (1913844)
   }
 }
 
-void main() { //Nur Hafni (1913844)
+void main() { //Nur Hafni (1913844), Farjana (1912190)
   List<Item> itemList = []; //To store products inserted
 
   while (true) {
@@ -68,7 +68,7 @@ void main() { //Nur Hafni (1913844)
   }
 }
 
-void getGST(double productPrice) {
+void getGST(double productPrice) { //Farjana (1912190)
   gstValue == 0.0 ? gstValue = 0.6 : gstValue = gstValue;
   double totalGST = productPrice * (gstValue / (100 + gstValue));
   // double finalAmount = totalGST + productPrice;
@@ -148,7 +148,7 @@ discount(String prodName, double prodPrice) { //Nur Hafni (1913844)
         break;
       }
   }
-  getGST(prodPrice);
+  getGST(prodPrice); //Farjana (1912190)
   return newPrice;
 }
 
@@ -157,7 +157,7 @@ afterDiscountPrice() { //Nur Hafni (1913844)
   print("The total amount after the discount is RM ${totalAfterDiscount} \n");
 }
 
-makePayment() {
+makePayment() { //Fatini (1911182)
   totalAfterDiscount.toStringAsFixed(2);
   print("TIME : ${DateTime.now()}");
   print("===========================");
