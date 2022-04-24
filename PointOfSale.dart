@@ -93,7 +93,7 @@ void createItem(List<Item> items) { //Ask user input and store in the list
 
 }
 
-displayProducts(List<Item> items) {
+displayProducts(List<Item> items) { //Display products list
   //Nur Asimah 1813212
 
   print("List of Products");
@@ -106,14 +106,14 @@ displayProducts(List<Item> items) {
   }
 }
 
+//Calculate total price including GST
 getGST() { //Farjana (1912190)
   double countGST = totalAfterDiscount * 0.06;
   totalIncGST = totalAfterDiscount + countGST;
 }
 
-calcQuantity(List<Item> items) {
+calcQuantity(List<Item> items) { //Calculate final price (With GST and discount)
   //Nur Hafni (1913844)
-
   //Nuridah (1828074)
 
   for (int i = 0; i < items.length; i++) {
@@ -131,7 +131,7 @@ calcQuantity(List<Item> items) {
 
 }
 
-//Declare discount for few items
+//Declare discount price for specific items
 discount(String disName, double disPrice) { //Nur Hafni (1913844)
 
   switch (disName.toLowerCase()) {
@@ -173,7 +173,7 @@ discount(String disName, double disPrice) { //Nur Hafni (1913844)
 }
 
 
-makePayment() {
+makePayment() { //Calculate balance money from total payment made
   //Fatini (1911182)
   totalIncGST.toStringAsFixed(2);
   print("TIME : ${DateTime.now()}");
