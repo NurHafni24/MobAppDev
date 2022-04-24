@@ -166,18 +166,21 @@ makePayment() { //Fatini (1911182)
   stdout.write("Enter your money: ");
   double money = double.parse(stdin.readLineSync()!);
 
-   if (money < totalAfterDiscount) {
+   while (money<totalAfterDiscount) {
     print("Not enough money T.T");
     stdout.write("Enter your money: ");
-    money = double.parse(stdin.readLineSync()!);
-  }
-    else  {
+    double money = double.parse(stdin.readLineSync()!);
+
+    if (money>=totalAfterDiscount) {
       double balance = money - totalAfterDiscount;
       balance.toStringAsFixed(2);
+      print("===========================");
       print("TOTAL  : RM ${totalAfterDiscount}");
       print("CASH   : RM ${money}");
       print("CHANGE : RM ${balance}");
       print("===========================");
       print("Thank you! Have a nice day!");
-    } 
+      break;
+    }
+  }
 }
