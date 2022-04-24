@@ -103,7 +103,7 @@ getGST() { //Farjana (1912190)
 calcQuantity(List<Item> items) {
   //Nur Hafni (1913844)
 
-  //double total = 0;
+  //Nuridah (1828074)
 
   for (int i = 0; i < items.length; i++) {
 
