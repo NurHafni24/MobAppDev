@@ -4,6 +4,7 @@ double newPrice = 0;
 double disc = 0; //Discount price
 double totalAfterDiscount = 0;
 double gstValue = 0.0;
+double totalIncGST = 0;
 
 class Item {
   //Nur Hafni (1913844)
@@ -69,13 +70,6 @@ void main() {
   }
 }
 
-void getGST(double productPrice) {
-  //Farjana (1912190)
-  gstValue == 0.0 ? gstValue = 0.06 : gstValue = gstValue;
-  double totalGST = productPrice * (gstValue / (100 + gstValue));
-  print("Total GST for 1 pack is: " + totalGST.toStringAsFixed(3));
-}
-
 void createItem(List<Item> items) {
   //Nur Hafni (1913844)
   stdout.write("Enter product description:");
@@ -98,7 +92,13 @@ void createItem(List<Item> items) {
   items.add(newItem);
 
   print("Product inserted at ${newItem.created_at}");
-  
+
+}
+
+getGST() { //Farjana (1912190)
+  double countGST = totalAfterDiscount * 0.06;
+  totalIncGST = totalAfterDiscount + countGST;
+  //print("Total include GST is " + totalIncGST.toStringAsFixed(2));
 }
 
 calcQuantity(List<Item> items) {
@@ -116,86 +116,84 @@ calcQuantity(List<Item> items) {
 
     totalAfterDiscount += (items[i].quantity * items[i].discTotal); //Total price with discount
   }
-  
-  getGST(totalAfterDiscount); //Farjana (1912190)
-
-  print("Total price including GST is $totalAfterDiscount"); //Total price include gst
+  getGST(); //Farjana (1912190)
+  print("Total price including GST is RM${totalIncGST.toStringAsFixed(2)}"); //Total price include gst
 
 }
 
 //Declare discount for few items
 discount(String disName, double disPrice) { //Nur Hafni (1913844)
 
-    switch (disName.toLowerCase()) {
-      case "milo":
-        {
-          disc = disPrice * 0.15;
-          newPrice = disPrice - disc;
-        }
-        break;
+  switch (disName.toLowerCase()) {
+    case "milo":
+      {
+        disc = disPrice * 0.15;
+        newPrice = disPrice - disc;
+      }
+      break;
 
-      case "downy":
-        {
-          disc = disPrice * 0.3;
-          newPrice = disPrice - disc;
-        }
-        break;
+    case "downy":
+      {
+        disc = disPrice * 0.3;
+        newPrice = disPrice - disc;
+      }
+      break;
 
-      case "chipsmore":
-        {
-          disc = disPrice * 0.1;
-          newPrice = disPrice - disc;
-        }
-        break;
+    case "chipsmore":
+      {
+        disc = disPrice * 0.1;
+        newPrice = disPrice - disc;
+      }
+      break;
 
-      case "bowl":
-        {
-          disc = disPrice * 0.7;
-          newPrice = disPrice - disc;
-        }
-        break;
+    case "bowl":
+      {
+        disc = disPrice * 0.7;
+        newPrice = disPrice - disc;
+      }
+      break;
 
-      default:
-        {
-          newPrice = disPrice;
-          break;
-        }
-    }
+    default:
+      {
+        newPrice = disPrice;
+        break;
+      }
+  }
   return newPrice;
 }
 
 
 makePayment() {
   //Fatini (1911182)
-  totalAfterDiscount.toStringAsFixed(2);
+  totalIncGST.toStringAsFixed(2);
   print("TIME : ${DateTime.now()}");
   print("===========================");
-  print("Your total is RM ${totalAfterDiscount.toStringAsFixed(2)}");
+  print("Your total is RM ${totalIncGST.toStringAsFixed(2)}");
   print("===========================");
   stdout.write("Enter your money: ");
   double money = double.parse(stdin.readLineSync()!);
 
-  if (money >= totalAfterDiscount) {
-    double balance = money - totalAfterDiscount;
+  if (money >= totalIncGST) {
+    double balance = money - totalIncGST;
     balance.toStringAsFixed(2);
     print("===========================");
-    print("TOTAL  : RM ${totalAfterDiscount.toStringAsFixed(2)}");
+    print("TOTAL  : RM ${totalIncGST.toStringAsFixed(2)}");
     print("CASH   : RM ${money}");
     print("CHANGE : RM ${balance.toStringAsFixed(2)}");
     print("===========================");
     print("Thank you! Have a nice day!");
   }
 
-  while (money < totalAfterDiscount) {
+  while (money < totalIncGST) {
     print("Not enough money T.T");
     stdout.write("Enter your money: ");
     double money = double.parse(stdin.readLineSync()!);
 
-    if (money >= totalAfterDiscount) {
-      double balance = money - totalAfterDiscount;
+    if (money >= totalIncGST) {
+      double balance = money - totalIncGST;
       balance.toStringAsFixed(2);
       print("===========================");
-      print("TOTAL  : RM ${totalAfterDiscount.toStringAsFixed(2)}");
+      print("TOTAL  : RM ${totalIncGST.toStringAsFixed(2)}");
       print("CASH   : RM ${money}");
       print("CHANGE : RM ${balance.toStringAsFixed(2)}");
       print("===========================");
