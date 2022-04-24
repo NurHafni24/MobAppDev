@@ -36,7 +36,7 @@ void main() { //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182)
 
     print("3. Total amount after discount");
     
-    print("4. Set GST percent (default = 0.6% )");
+    print("4. Set GST percent (default = 0.06% )");
 
     print("5. Make Payment \n");
 
@@ -69,7 +69,7 @@ void main() { //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182)
 }
 
 void getGST(double productPrice) { //Farjana (1912190)
-  gstValue == 0.0 ? gstValue = 0.6 : gstValue = gstValue;
+  gstValue == 0.0 ? gstValue = 0.06 : gstValue = gstValue;
   double totalGST = productPrice * (gstValue / (100 + gstValue));
   // double finalAmount = totalGST + productPrice;
   print("Total GST for 1 pack is: " + totalGST.toStringAsFixed(3));
