@@ -161,12 +161,23 @@ makePayment() { //Fatini (1911182)
   totalAfterDiscount.toStringAsFixed(2);
   print("TIME : ${DateTime.now()}");
   print("===========================");
-  print("Your total is RM ${totalAfterDiscount}");
+  print("Your total is RM ${totalAfterDiscount.toStringAsFixed(2)}");
   print("===========================");
   stdout.write("Enter your money: ");
   double money = double.parse(stdin.readLineSync()!);
 
-   while (money<totalAfterDiscount) {
+  if (money>=totalAfterDiscount) {
+    double balance = money - totalAfterDiscount;
+    balance.toStringAsFixed(2);
+    print("===========================");
+    print("TOTAL  : RM ${totalAfterDiscount.toStringAsFixed(2)}");
+    print("CASH   : RM ${money}");
+    print("CHANGE : RM ${balance.toStringAsFixed(2)}");
+    print("===========================");
+    print("Thank you! Have a nice day!");
+  }
+
+  while (money<totalAfterDiscount) {
     print("Not enough money T.T");
     stdout.write("Enter your money: ");
     double money = double.parse(stdin.readLineSync()!);
@@ -175,9 +186,9 @@ makePayment() { //Fatini (1911182)
       double balance = money - totalAfterDiscount;
       balance.toStringAsFixed(2);
       print("===========================");
-      print("TOTAL  : RM ${totalAfterDiscount}");
+      print("TOTAL  : RM ${totalAfterDiscount.toStringAsFixed(2)}");
       print("CASH   : RM ${money}");
-      print("CHANGE : RM ${balance}");
+      print("CHANGE : RM ${balance.toStringAsFixed(2)}");
       print("===========================");
       print("Thank you! Have a nice day!");
       break;
