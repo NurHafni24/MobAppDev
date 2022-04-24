@@ -98,7 +98,6 @@ void createItem(List<Item> items) {
 getGST() { //Farjana (1912190)
   double countGST = totalAfterDiscount * 0.06;
   totalIncGST = totalAfterDiscount + countGST;
-  //print("Total include GST is " + totalIncGST.toStringAsFixed(2));
 }
 
 calcQuantity(List<Item> items) {
