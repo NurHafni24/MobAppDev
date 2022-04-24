@@ -15,7 +15,7 @@ class Item {
   late double discTotal; //price after discount
   late DateTime created_at;
 
-  Item(String name, double price, double quantity) {
+  Item(String name, double price, double quantity) { //To store product description
     this.name = name;
     this.price = price;
     this.quantity = quantity;
@@ -26,7 +26,7 @@ class Item {
 
 void main() {
   //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182), Nur Asimah(1813212)
-  List<Item> itemList = []; //To store products inserted
+  List<Item> itemList = []; //To store products inserted in the list
 
   while (true) {
     //Let user choose
@@ -36,7 +36,7 @@ void main() {
 
     print("1. Insert product");
 
-    print("2. List of products"); //print product list with the detail
+    print("2. List of products");
 
     print("3. Total price include GST");
 
@@ -56,8 +56,6 @@ void main() {
       } else if (input == 2) {
         displayProducts(itemList) ; 
       }  else if (input == 3) {
-        // stdout.write("Enter gst percent: ");
-        // gstValue = double.parse(stdin.readLineSync()!);
         calcQuantity(itemList);
       } else if (input == 4) {
         makePayment();
@@ -69,8 +67,9 @@ void main() {
   }
 }
 
-void createItem(List<Item> items) {
-  //Nur Hafni (1913844)
+//Nur Hafni (1913844)
+void createItem(List<Item> items) { //Ask user input and store in the list
+  
   stdout.write("Enter product description:");
 
   print('\n');
