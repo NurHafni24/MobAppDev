@@ -115,8 +115,10 @@ calcQuantity(List<Item> items) {
 
     totalAfterDiscount += (items[i].quantity * items[i].discTotal); //Total price with discount
   }
-  getGST(); //Farjana (1912190)
-  print("Total price including GST is RM${totalIncGST.toStringAsFixed(2)}"); //Total price include gst
+  
+  getGST(totalAfterDiscount); //Farjana (1912190)
+
+  print("Total price including GST is $totalAfterDiscount"); //Total price include gst
 
 }
 
