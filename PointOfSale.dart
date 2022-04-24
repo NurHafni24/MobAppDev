@@ -5,22 +5,26 @@ double disc = 0; //Discount price
 double totalAfterDiscount = 0;
 double gstValue = 0.0;
 
-class Item { //Nur Hafni (1913844)
+class Item {
+  //Nur Hafni (1913844)
   //late keyword is to tell the compiler to treat this variable as non-nullable and will be initialized later
   late String name;
   late double price;
   late double quantity;
+  late double discTotal; //price after discount
   late DateTime created_at;
 
   Item(String name, double price, double quantity) {
     this.name = name;
     this.price = price;
     this.quantity = quantity;
+    this.discTotal = 0;
     this.created_at = DateTime.now();
   }
 }
 
-void main() { //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182)
+void main() {
+  //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182)
   List<Item> itemList = []; //To store products inserted
 
   while (true) {
@@ -34,18 +38,16 @@ void main() { //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182)
     //PART ASIMAH
     print("2. List of products"); //print product list with the detail
 
-    print("3. Total amount after discount");
-    
-    print("4. Set GST percent (default = 0.06% )");
+    print("3. Total price include GST");
 
-    print("5. Make Payment \n");
+    print("4. Make Payment \n");
 
     stdout.write("Enter your choice: ");
 
     try {
       int input = int.parse(stdin.readLineSync()!);
 
-      if (input > 5 || input < 1) {
+      if (input > 4 || input < 1) {
         print("ERROR: Please select a number between 1 - 5");
         continue;
       }
@@ -53,12 +55,11 @@ void main() { //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182)
         createItem(itemList);
       } else if (input == 2) {
         //code Asimah
-      } else if (input == 3) {
-        afterDiscountPrice();
+      }  else if (input == 3) {
+        // stdout.write("Enter gst percent: ");
+        // gstValue = double.parse(stdin.readLineSync()!);
+        calcQuantity(itemList);
       } else if (input == 4) {
-        stdout.write("Enter gst percent: ");
-        gstValue = double.parse(stdin.readLineSync()!);
-      } else if (input == 5) {
         makePayment();
         break;
       }
@@ -68,14 +69,15 @@ void main() { //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182)
   }
 }
 
-void getGST(double productPrice) { //Farjana (1912190)
+void getGST(double productPrice) {
+  //Farjana (1912190)
   gstValue == 0.0 ? gstValue = 0.06 : gstValue = gstValue;
   double totalGST = productPrice * (gstValue / (100 + gstValue));
-  // double finalAmount = totalGST + productPrice;
   print("Total GST for 1 pack is: " + totalGST.toStringAsFixed(3));
 }
 
-void createItem(List<Item> items) { //Nur Hafni (1913844)
+void createItem(List<Item> items) {
+  //Nur Hafni (1913844)
   stdout.write("Enter product description:");
 
   print('\n');
@@ -89,75 +91,82 @@ void createItem(List<Item> items) { //Nur Hafni (1913844)
   stdout.write("Quantity: ");
   double productQuantity = double.parse(stdin.readLineSync()!);
 
+  // double disc = 0;
+
   var newItem = Item(productName, productPrice, productQuantity);
 
   items.add(newItem);
 
-  calcQuantity(newItem.price, productQuantity, newItem.name);
-
   print("Product inserted at ${newItem.created_at}");
+  
 }
 
-void calcQuantity(double price, double quantity, String productName) { //Nur Hafni (1913844)
-  var payment = discount(
-      productName, price); //Total price after calculate with quantity inserted
+calcQuantity(List<Item> items) {
+  //Nur Hafni (1913844)
 
-  totalAfterDiscount = totalAfterDiscount + (payment * quantity);
+  //double total = 0;
+
+  for (int i = 0; i < items.length; i++) {
+
+    items[i].discTotal = discount(items[i].name, items[i].price); //Discount price for specific item
+
+  }
+
+  for (int i = 0; i < items.length; i++) {
+
+    totalAfterDiscount += (items[i].quantity * items[i].discTotal); //Total price with discount
+  }
+  
+  getGST(totalAfterDiscount); //Farjana (1912190)
+
+  print("Total price including GST is $totalAfterDiscount"); //Total price include gst
+
 }
 
 //Declare discount for few items
-discount(String prodName, double prodPrice) { //Nur Hafni (1913844)
-  prodName = prodName.toLowerCase();
+discount(String disName, double disPrice) { //Nur Hafni (1913844)
 
- switch (prodName) {
-    case "milo":
-      {
-        disc = prodPrice * 0.15;
-        newPrice = prodPrice - disc;
-        print("Price After Discount for 1 pack ${newPrice}");
-      }
-      break;
-
-    case "downy":
-      {
-        disc = prodPrice * 0.3;
-        newPrice = prodPrice - disc;
-        print("Price After Discount for 1 bottle ${newPrice}");
-      }
-      break;
-
-    case "chipsmore":
-      {
-        disc = prodPrice * 0.1;
-        newPrice = prodPrice - disc;
-        print("Price After Discount for 1 pack ${newPrice}");
-      }
-      break;
-
-    case "bowl":
-      {
-        disc = prodPrice * 0.7;
-        newPrice = prodPrice - disc;
-        print("Price After Discount for 1 bowl ${newPrice}");
-      }
-      break;
-
-    default:
-      {
-        newPrice = prodPrice;
+    switch (disName.toLowerCase()) {
+      case "milo":
+        {
+          disc = disPrice * 0.15;
+          newPrice = disPrice - disc;
+        }
         break;
-      }
-  }
-  getGST(prodPrice); //Farjana (1912190)
+
+      case "downy":
+        {
+          disc = disPrice * 0.3;
+          newPrice = disPrice - disc;
+        }
+        break;
+
+      case "chipsmore":
+        {
+          disc = disPrice * 0.1;
+          newPrice = disPrice - disc;
+        }
+        break;
+
+      case "bowl":
+        {
+          disc = disPrice * 0.7;
+          newPrice = disPrice - disc;
+        }
+        break;
+
+      default:
+        {
+          newPrice = disPrice;
+          break;
+        }
+    }
   return newPrice;
 }
 
-afterDiscountPrice() { //Nur Hafni (1913844)
 
-  print("The total amount after the discount is RM ${totalAfterDiscount} \n");
-}
-
-makePayment() { //Fatini (1911182)
+makePayment() {
+  //Fatini (1911182)
   totalAfterDiscount.toStringAsFixed(2);
   print("TIME : ${DateTime.now()}");
   print("===========================");
@@ -166,7 +175,7 @@ makePayment() { //Fatini (1911182)
   stdout.write("Enter your money: ");
   double money = double.parse(stdin.readLineSync()!);
 
-  if (money>=totalAfterDiscount) {
+  if (money >= totalAfterDiscount) {
     double balance = money - totalAfterDiscount;
     balance.toStringAsFixed(2);
     print("===========================");
@@ -177,12 +186,12 @@ makePayment() { //Fatini (1911182)
     print("Thank you! Have a nice day!");
   }
 
-  while (money<totalAfterDiscount) {
+  while (money < totalAfterDiscount) {
     print("Not enough money T.T");
     stdout.write("Enter your money: ");
     double money = double.parse(stdin.readLineSync()!);
 
-    if (money>=totalAfterDiscount) {
+    if (money >= totalAfterDiscount) {
       double balance = money - totalAfterDiscount;
       balance.toStringAsFixed(2);
       print("===========================");
