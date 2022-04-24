@@ -25,7 +25,7 @@ class Item {
 }
 
 void main() {
-  //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182)
+  //Nur Hafni (1913844), Farjana (1912190), Fatini (1911182), Nur Asimah(1813212)
   List<Item> itemList = []; //To store products inserted
 
   while (true) {
@@ -36,7 +36,6 @@ void main() {
 
     print("1. Insert product");
 
-    //PART ASIMAH
     print("2. List of products"); //print product list with the detail
 
     print("3. Total price include GST");
@@ -55,7 +54,7 @@ void main() {
       if (input == 1) {
         createItem(itemList);
       } else if (input == 2) {
-        //code Asimah
+        displayProducts(itemList) ; 
       }  else if (input == 3) {
         // stdout.write("Enter gst percent: ");
         // gstValue = double.parse(stdin.readLineSync()!);
@@ -93,6 +92,19 @@ void createItem(List<Item> items) {
 
   print("Product inserted at ${newItem.created_at}");
 
+}
+
+displayProducts(List<Item> items) {
+  //Nur Asimah 1813212
+
+  print("List of Products");
+  print("=================");
+
+  for (int i = 0; i < items.length; i++) {
+    print("#${i + 1} ${items[i].name}\tRM ${items[i].price}\t x${items[i].quantity}");
+
+
+  }
 }
 
 getGST() { //Farjana (1912190)
