@@ -4,6 +4,7 @@
 1. Nur Hafni Binti Mohd Nizam (1913844)
 2. Farjana Mammi (1912190)
 3. Siti Nurul Fatini binti Azahan (1911182)
+4. Nur Asimah binti Che Mamat (1813212)
 
 
 # Work Distribution
